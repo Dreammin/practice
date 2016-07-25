@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>提交和重置表单</title>
+</head>
+<body>
+	<form id = "myForm1">
+		<input type="text" name="myText1">
+		<input type="submit" id="sub" name="submit" value="提交">
+		<input type="reset" id="reset" name="reset" value="重置"> 
+	</form>
+	<div>
+		<p>
+			使用type类型来提交和重置表单时，会在提交和重置之前触发submit或reset事件。
+		</p>
+	</div>
+	<form id = "myForm2">
+		<input type="text" name="myText2">
+		<input type="button" id="jssubmitBtn" name="submit" value="js方法提交">
+		<input type="button" id="jsresetBtn" name="reset" value="js方法重置" >
+	</form>
+	<div>
+		<p>
+			使用form.submit()方法提交表单时不会触发submit事件，但是使用form.reset()重置表单数据时会触发reset事件。
+		</p>
+	</div>
+	<form id = "myForm3">
+		<input type="text" name="myText3">
+		<input type="image" id="imgBtn" name="imgSubmit" src="../images/github.png" value="图片按钮">
+	</form>
+	<div>
+		<p>
+			使用form.submit()方法提交表单时不会触发submit事件，但是使用form.reset()重置表单数据时会触发reset事件。
+		</p>
+	</div>
+	<script type="text/javascript">
+		var jssubmitBtn = document.getElementById("jssubmitBtn");
+		var jsresetBtn = document.getElementById("jsresetBtn");
+		var myForm1 = document.getElementById("myForm1");
+		var myForm2 = document.getElementById("myForm2");
+
+		jssubmitBtn.addEventListener("click",function() {
+			myForm2.submit();
+		});
+		jsresetBtn.addEventListener("click",function() {
+			myForm2.reset();
+		});
+
+		myForm1.addEventListener("submit",function() {
+			console.log("触发myForm1的submit事件");
+		});
+		myForm1.addEventListener("reset",function() {
+			console.log("触发myForm1的reset事件");
+		});
+		myForm2.addEventListener("submit",function() {
+			console.log("触发myForm2的submit事件");
+		});
+		myForm2.addEventListener("reset",function() {
+			console.log("触发myForm2的reset事件");
+		});
+	</script>
+</body>
+</html>

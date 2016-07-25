@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas图片缩放</title>
+</head>
+<body style="background-color: black">
+	<canvas id="myCanvas" style="border:2px solid #aaa;display: block; margin: 0 auto"></canvas>
+	<input id="scaleRange" type="range" name="range" min="0.5" max="3" step="0.01" value="1.0">
+	<canvas id="watermarkCanvas" style="border:2px solid #aaa;display: none; margin: 0 auto"></canvas>
+	<!-- <img src="../../images/image.jpg"> -->
+	<script type="text/javascript">
+		var canvasWidth = 1152/2;
+		var canvasHeight = 768/2;
+
+		var myCanvas = document.getElementById("myCanvas");
+		var context,watermarkContext;
+		var image = new Image();
+		var scaleRange = document.getElementById("scaleRange");
+		var scale = scaleRange.value;
+		var watermarkCanvas = document.getElementById("watermarkCanvas");
+		window.onload = function() {
+			myCanvas.width = canvasWidth;
+			myCanvas.height = canvasHeight;
+			watermarkCanvas.width = 270;
+			watermarkCanvas.height = 50;
+			
+			if (myCanvas.getContext) {
+				context = myCanvas.getContext("2d");
+				image.src = "../../images/img-lg.jpg";
+				image.onload = function() {
+					//context.drawImage(image,0,0,canvasWidth,canvasHeight);
+					drawImageByScale(scale);
+					scaleRange.onmousemove = function(){
+						scale = this.value;
+						drawImageByScale(scale);
+					}
+				}
+
+				//watermark
+				watermarkContext = watermarkCanvas.getContext("2d");
+				watermarkContext.font = "bold 24px Arial";
+				watermarkContext.textBaseline = "middle";
+				watermarkContext.fillStyle = "rgba(255,255,255,0.5)";
+				watermarkContext.fillText("==Dreammin.com==",20,25);
+			
+			}
+
+			
+		}
+		
+
+		function drawImageByScale(scale){
+			var scaleImageWidth = canvasWidth * scale;
+			var scaleImageHeight = canvasHeight * scale;
+			/*var sx = scaleImageWidth/2 - canvasWidth/2;
+			var sy = scaleImageHeight/2 - canvasHeight/2;
+			context.drawImage(image,sx,sy,canvasWidth,canvasHeight,0,0,canvasWidth,canvasHeight)*/
+			var dx = canvasWidth/2 - scaleImageWidth/2;
+			var dy = canvasHeight/2 -scaleImageHeight/2;
+			context.clearRect(0,0,canvasWidth,canvasHeight);
+			context.drawImage(image,dx,dy,scaleImageWidth,scaleImageHeight);
+			context.drawImage(watermarkCanvas,canvasWidth - watermarkCanvas.width,canvasHeight - watermarkCanvas.height);
+		}
+	</script>
+</body>
+</html>

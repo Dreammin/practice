@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>offset/client/scroll</title>
+	<style type="text/css">
+		.parent{
+			width: 500px;
+			height: 500px;
+			background-color: #ffc;
+			/* margin:0 auto; */
+			border:5px solid #ddd;
+		}
+		.child{
+			width: 200px;
+			height: 200px;
+			background-color: #cff;
+			margin:30px;
+			padding: 50px;
+			border:5px solid #fcf;
+			overflow: scroll;
+		}
+	</style>
+</head>
+<body>
+	<div class="parent">
+		<div id="myChild" class="child">
+			.borderLeft {border-left: 1px solid #DADADA;}
+			.borderTop {margin-top: 30px;border-top: 1px solid #DADADA;}
+			/*Supplementary*/
+			.honorsContent{font-size: 18px;}
+			.borderLeft {border-left: 1px solid #DADADA;}
+			.borderTop {margin-top: 30px;border-top: 1px solid #DADADA;}
+			/*Supplementary*/
+			.honorsContent{font-size: 18px;}
+		</div>
+	</div>
+	<script type="text/javascript">
+		var myChild = document.getElementById("myChild");
+		myChild.addEventListener("mousewheel",function() {
+			var offsetHeight = myChild.offsetHeight;
+			var offsetWidth = myChild.offsetWidth;
+			var offsetLeft = myChild.offsetLeft;
+			var offsetTop = myChild.offsetTop;
+			var clientWidth = myChild.clientWidth;
+			var clientHeight = myChild.clientHeight;
+			var scrollHeight = myChild.scrollHeight;
+			var scrollWidth = myChild.scrollWidth;
+			var scrollLeft = myChild.scrollLeft;
+			var scrollTop = myChild.scrollTop;
+			/*console.log("offsetHeight: " + offsetHeight);
+			console.log("offsetWidth: " + offsetWidth);
+			console.log("offsetLeft: " + offsetLeft);
+			console.log("offsetTop: " + offsetTop);
+			console.log("clientWidth: " + clientWidth);
+			console.log("clientHeight: " + clientHeight);*/
+			console.log("scrollHeight: " + scrollHeight);
+			console.log("scrollWidth: " + scrollWidth);
+			console.log("scrollLeft: " + scrollLeft);
+			console.log("scrollTop: " + scrollTop);
+		})
+		
+	</script>
+</body>
+</html>

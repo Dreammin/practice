@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单验证改变背景色</title>
+</head>
+<body>
+	<form>
+		<div>
+			<span>姓名：</span>
+			<input id="myName" type="text" name="name">
+		</div>
+		<div>
+			<span>电话：</span>
+			<input id="myPhoneNum" type="text" name="telephone">
+		</div>
+	</form>
+	<script type="text/javascript">
+		var  validatePhoneNum = function(event){
+			var type = event.type;
+			var target = event.target;
+			switch(type){
+				case "focus":
+					target.style.backgroundColor = "#FDFD7D";
+					break;
+				case "blur":
+					target.style.backgroundColor = "";
+					break;
+				case "keyup":
+					if (/\d{11}/.test(target.value)) {
+						target.style.border = "";		
+					} else {
+						target.style.border = "2px solid red";
+					}
+			}
+		}
+
+		var myPhoneNum = document.getElementById("myPhoneNum");
+		myPhoneNum.onfocus = validatePhoneNum;
+		myPhoneNum.onblur = validatePhoneNum;
+		myPhoneNum.onkeyup = validatePhoneNum;
+		/*myPhoneNum.addEventListener("focus",function(event){
+			var target = event.target;
+			target.style.backgroundColor = "#FDFD7D";
+		});
+		myPhoneNum.addEventListener("keyup",function(event){
+			var target = event.target;
+			console.log(target.value);
+			console.log(/[^\d]/.test(target.value));
+			if (/\d{11}/.test(target.value)) {
+				target.style.border = "";		
+			} else {
+				target.style.border = "2px solid red";
+			}
+		});
+		myPhoneNum.addEventListener("blur",function(event){
+			var target = event.target;
+			target.style.backgroundColor = "";
+		});*/
+	</script>
+</body>
+</html>

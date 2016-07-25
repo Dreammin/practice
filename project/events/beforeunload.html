@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>beforeunload事件</title>
+	<script type="text/javascript">
+	</script>
+</head>
+<body>
+	<a href="file:///G:/my/%E5%AD%A6%E4%B9%A0/aa%E5%89%8D%E7%AB%AF/%E7%BB%83%E4%B9%A0/%E4%BA%8B%E4%BB%B6/contextmenu%E4%BA%8B%E4%BB%B6.html">contextmenu</a>
+	<script type="text/javascript">
+		window.addEventListener("beforeunload",function(event) {
+			var message = "ok?"
+			event.returnValue = message;
+			//return message;
+		});
+		/*window.addEventListener("beforeunload",function(event) {
+			window.confirm = function(){
+				return true;
+			};
+		});*/
+	</script>
+</body>
+</html>

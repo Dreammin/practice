@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas绘图</title>
+	<link rel="stylesheet" type="text/css" href="../css/default.css">
+	<style type="text/css">
+		#myCanvas{
+			background-color: #eee;
+		}
+	</style>
+</head>
+<body>
+	<!-- canvas的默认宽高为300px * 150px,在css中为canvas定义宽高，实际上把宽高为300px * 150px的画布进行了拉伸，如果在这样的情况下进行canvas绘图，你得到的图形可能就是变形的效果。所以，在canvas绘图时，应该在canvas标签里直接定义宽高。-->	
+	<canvas id="myCanvas" height="500px" width="500px"></canvas>
+	<script type="text/javascript">
+		var myCanvas = document.getElementById("myCanvas");
+		if (myCanvas.getContext) {
+			var context = myCanvas.getContext("2d");
+			//绘制一个填充的和一个边框的矩形
+			context.strokeStyle = "#000";
+			context.fillStyle = "#cff";
+			context.fillRect(10,10,50,50);
+			context.strokeRect(10,10,50,50);
+			//绘制一个填充的和一个边框的矩形
+			context.strokeStyle = "#000";
+			context.fillStyle = "rgba(255,63,255,0.5)";
+			context.fillRect(30,30,50,50);
+			context.strokeRect(30,30,50,50);
+			//清除指定区域
+			context.clearRect(40,40,10,10);
+
+			//开始画圆
+			context.beginPath();
+			context.arc(200,200,100,0,2 * Math.PI,false);
+			//将绘图游标移动到内圆边界上
+			context.moveTo(295,200);
+			context.arc(200,200,95,0,2 * Math.PI,false);
+			//绘制分针
+			context.moveTo(200,200);
+			context.lineTo(200,120);
+			//绘制时针
+			context.moveTo(200,200);
+			context.lineTo(150,200);
+			//context.moveTo(200,200);
+			//context.lineTo(200 + Math.sin(Math.PI/6)*80,200-80*Math.sin(Math.PI/3));
+			context.stroke();
+
+			//绘制表盘数字
+			context.font = "bolid 16px Arial";
+			context.textAlign = "center";
+			context.Baseline = "middle";
+			//context.strokeText("12",200, 118);
+			//context.strokeText("1",200 + Math.sin(Math.PI/6)*78,200-78*Math.sin(Math.PI/3));
+			var pi = Math.PI;
+			var x,y,str;
+			for(var i = 0; i < 12 ; i++){
+				x = 200 + 78 * Math.cos(i*pi/6);
+				y = 200 - 78 * Math.sin(i*pi/6);
+				str = (3-i)>0?(3-i):(15-i); 
+				context.strokeText(str+"",x, y);
+			}
+		}
+	</script>
+</body>
+</html>

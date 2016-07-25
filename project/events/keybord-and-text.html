@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>键盘与文本事件</title>
+</head>
+<body>
+	<input id="mytext" type="text" name="mytext">
+	<div>
+		<code>
+			
+		</code>
+		<p>
+			keydown: 按下任意键触发<br>
+			keypress: 按下字符键触发（非字符键的情况下不会触发）<br>
+			keyup: 释放键盘上的键时触发<br>
+			textInput: 在可编辑区域中输入字符时触发。它的event对象中包含一个data属性，即当前所输入的字符<br>
+			<br>
+			注：keydown和keypress是在文本框发生变化前触发，而keyup是在文本框内容发生变化之后触发。
+			<br>
+			所以当文本框为空时，键盘输入“2”时，触发keypress和keydown事件，输出的this.value的值是空。<br>
+			触发keyup时，this.value的值是改变后的值“2”。<br>
+			<br>
+			keypress和textInput的区别：
+			可以获取焦点的元素都可以触发keypress事件，但只有可编辑区域才能触发textInput事件。<br>
+			textInput只会在用户按下能够输入实际字符的键时才会触发（如在输入S时，按下shift时不会触发，只有按下s时才会触发。）而keypress在按下影响文本显示的键时都会触发（如删除键）
+		</p>
+	</div>
+	<script type="text/javascript">
+		var mytext = document.getElementById("mytext");
+		mytext.addEventListener("keypress",function(event){
+			console.log("keypress: " + this.value);
+		});
+		mytext.addEventListener("keydown",function(event){
+			console.log("keydown: " + this.value);
+		});
+		mytext.addEventListener("keyup",function(event){
+			console.log("keyup: " + this.value);
+		});
+
+		mytext.addEventListener("textInput",function(event){
+			console.log("textInput: " + "value: " + this.value + "data: " + event.data);
+		});
+	</script>
+</body>
+</html>

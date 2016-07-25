@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>drag</title>
+	<style type="text/css">
+		#mydiv{
+			width: 100px;
+			height: 100px;
+			background-color: #aaa;
+			position: absolute;
+		}
+		#droptarget{
+			width: 400px;
+			height: 400px;
+			background-color: #ffc;
+			margin:50px auto;
+
+		}
+	</style>
+</head>
+<body>
+<!-- draggable="true" -->
+	<div id="mydiv" ></div>
+	<div id="droptarget"></div>
+	<script type="text/javascript">
+
+		var droptarget = document.getElementById("mydiv");
+		var dragging = null,posX,posY;
+		droptarget.addEventListener("mousedown",function(e){
+			//console.log("mousedown in");
+			posX = e.clientX - droptarget.offsetLeft ;
+			posY = e.clientY - droptarget.offsetTop;
+			dragging = e.target;
+			dragging.style.cursor = "move"
+		});
+		document.addEventListener("mousemove",function(e){
+			//console.log("mousemove in");
+			
+			if (dragging !== null) {
+				dragging.style.left = e.clientX - posX + "px";
+				dragging.style.top = e.clientY - posY + "px";
+			}
+		});
+		droptarget.addEventListener("mouseup",function(e){
+			//console.log("mouseup in");
+			dragging.style.cursor = "";
+			dragging = null;
+		});
+		/*droptarget.addEventListener("dragover",function(e) {
+			e.preventDefault();
+		});
+		droptarget.addEventListener("dragenter",function(e) {
+			e.preventDefault();
+		});*/
+	</script>
+</body>
+</html>

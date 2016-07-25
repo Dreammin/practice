@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>select多选</title>
+</head>
+<body>
+	<select id="mySelect" multiple="true">
+		<option value="Item 1">Item 1</option>
+		<option value="Item 2">Item 2</option>
+		<option value="Item 3">Item 3</option>
+		<option value="Item 4">Item 4</option>
+		<option value="Item 5">Item 5</option>
+	</select>
+	<script type="text/javascript">
+		var mySelect = document.getElementById("mySelect");
+		for(var i = 0 , len = mySelect.options.length; i<len ; i++){
+			mySelect.remove(0);
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>html5约束验证API</title>
+</head>
+<body>
+	<form>
+		用户名：<input type="text" name="username" required>
+		<!--邮箱验证，如果不添加required，内容为空也会验证通过-->
+		邮箱：<input type="email" name="myEmail">
+		数字：<input type="num" name="count" pattern="\d+">
+		<input type="submit" name="validateSubmit" value="验证提交">
+		<input type="submit" name="noValidateSubmit" formnovalidate value="不验证提交">
+	</form>
+</body>
+</html>

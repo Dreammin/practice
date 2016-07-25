@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>contextmenu事件</title>
+	<style type="text/css">
+		#myDiv{
+			height: 100px;
+			background-color: #ff0;
+		}
+		#myMenu{
+			visibility: hidden;
+			background-color: #ccf;
+			position: absolute;
+		}
+	</style>
+</head>
+<body>
+	<div id="myDiv">
+		right click me 
+	</div>
+	<ul id="myMenu">
+		<li>Item 1</li>
+		<li>Item 2</li>
+		<li>Item 3</li>
+	</ul>
+	<script type="text/javascript">
+		var myDiv = document.getElementById("myDiv");
+		var myMenu = document.getElementById("myMenu");
+		myDiv.addEventListener("contextmenu",function(event){
+			event.preventDefault();
+			myMenu.style.left = event.clientX + "px";
+			myMenu.style.top = event.clientY + "px";
+			myMenu.style.visibility = "visible";
+		});
+		document.addEventListener("click",function() {
+			myMenu.style.visibility = "hidden";
+		});
+	</script>
+</body>
+</html>

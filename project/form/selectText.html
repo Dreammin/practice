@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>选择文本</title>
+</head>
+<body>
+	<textarea id="myTextarea">点击我会选择所有文档。</textarea>
+	<script type="text/javascript">
+		var myTextarea = document.getElementById("myTextarea");
+		//自动选择部分文本
+		myTextarea.setSelectionRange(0,4);
+		//当文本框获取焦点时选择所有文本。
+		myTextarea.addEventListener("focus",function(event){
+			event.target.select();
+		});
+		//添加select事件。调用select()时也会触发该事件
+		myTextarea.addEventListener("select",function(event) {
+			var target = event.target;
+			console.log(target.value.substring(target.selectionStart,target.selectionEnd));
+		})
+	</script>
+</body>
+</html>

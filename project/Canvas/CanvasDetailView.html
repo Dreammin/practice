@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas细节查看器</title>
+	<style type="text/css">
+		#showCanvas,#detailCanvas{
+			display: block;
+			margin:0 auto;
+			border:1px solid #aaa;
+		}
+	</style>
+</head>
+<body>
+	<canvas id = "showCanvas"></canvas>
+	<canvas id = "detailCanvas" style="display:none"></canvas>
+	<script type="text/javascript">
+		var showCanvasWidth = 1152/2;
+		var showCanvasHeight = 768/2;
+		//var detailCanvasWidth = 200;
+		//var detailCanvasHeight = 200;
+		window.onload = function(){
+			var showCanvas = document.getElementById("showCanvas");
+			var detailCanvas = document.getElementById("detailCanvas");
+			showCanvas.width = showCanvasWidth;
+			showCanvas.height = showCanvasHeight;
+			
+			var showContext,detailContext,imageWidth,imageHeight,scaleX,scaleY;
+			var image = new Image();
+			if (showCanvas.getContext) {
+				showContext = showCanvas.getContext("2d");
+				detailContext = detailCanvas.getContext("2d");
+				image.src = "../../images/img-lg.jpg";
+				image.onload = function(){
+					imageWidth = image.width;
+					imageHeight = image.height;
+					detailCanvas.width = imageWidth;
+					detailCanvas.height = imageHeight;
+					scaleX = imageWidth/showCanvasWidth;
+					scaleY = imageHeight/showCanvasHeight;
+					showContext.drawImage(image,0,0,showCanvasWidth,showCanvasHeight);
+					detailContext.drawImage(image,0,0);
+				}
+			}
+			
+			showCanvas.onmousemove = function(e) {
+				var canvasX = e.clientX - e.target.offsetLeft;
+				var canvasY = e.clientY - e.target.offsetTop;
+				
+				showDetail(canvasX,canvasY);
+			}
+
+			showCanvas.onmouseout = function(e) {
+				showContext.clearRect(0,0,showCanvasHeight,showCanvasHeight);
+				showContext.drawImage(image,0,0,showCanvasWidth,showCanvasHeight);
+			}
+
+			function showDetail(x,y) {
+				
+				showContext.clearRect(0,0,showCanvasHeight,showCanvasHeight);
+				showContext.drawImage(image,0,0,showCanvasWidth,showCanvasHeight);
+				showContext.save();
+
+				showContext.lineWith = 10;
+				showContext.strokeStyle = "#069";
+				showContext.beginPath();
+				showContext.arc(x,y,100,2*Math.PI,false);
+				showContext.stroke();
+				showContext.clip();
+				showContext.drawImage(detailCanvas,x*scaleX - 100 , y*scaleY - 100 ,200,200,x -100,y-100,200,200);
+				/**/
+				showContext.restore();
+			}
+			/*function getPositionOnCanvas(x,y) {
+				return {
+					canvasX:x
+				}
+			}*/
+		}
+
+
+	</script>
+</body>
+</html>
